@@ -11,19 +11,23 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Mvc;
 using AnimalShelterAPI.ViewModels;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AnimalShelterAPI.Controllers
 {
 
   [Route("api/[controller]")]
   [ApiController]
+  [AllowAnonymous]
   public class SecurityController
   {
     private readonly IConfiguration _config;
-    public SecurityController(IConfiguration config,UserManager userManager)
+    private readonly UserManager<User> _userManager;
+    public SecurityController(IConfiguration config, UserManager<User> userManager)
     {
-        
-        _config = config;
+      _userManager = userManager;
+      _config = config;
     }
     private string GenerateJSONWebToken(string username)
     {
@@ -32,7 +36,7 @@ namespace AnimalShelterAPI.Controllers
 
       var token = new JwtSecurityToken(
         _config["Jwt:Issuer"],
-        audience:username,
+        audience: username,
         null,
         expires: DateTime.Now.AddMinutes(120),
         signingCredentials: credentials);
@@ -41,19 +45,22 @@ namespace AnimalShelterAPI.Controllers
     }
 
     [HttpPost]
-    public async Task<string> Register([FromBody] LoginViewModel loginView)
+    [Route("/api/security/register")]
+    [AllowAnonymous]
+    public async Task Register([FromBody] RegisterViewModel registerView)
     {
+      Console.WriteLine(registerView.Username);
+      await _userManager.CreateAsync(new User { UserName = registerView.Username }, registerView.Password);
 
-      
     }
-    
-    [HttpPost]
-    public async Task<string> Login([FromBody] LoginViewModel loginView)
-    {
 
-        return GenerateJSONWebToken(loginView.Username);
-    }
+    // [HttpPost]
+    // public async Task<string> Login([FromBody] LoginViewModel loginView)
+    // {
+
+    //   return GenerateJSONWebToken(loginView.Username);
+    // }
   }
 
-  
+
 }
