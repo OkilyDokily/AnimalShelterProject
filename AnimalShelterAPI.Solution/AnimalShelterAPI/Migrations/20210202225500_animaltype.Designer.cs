@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnimalShelterAPI.Migrations
 {
     [DbContext(typeof(AnimalShelterContext))]
-    [Migration("20210201235205_third")]
-    partial class third
+    [Migration("20210202225500_animaltype")]
+    partial class animaltype
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,8 @@ namespace AnimalShelterAPI.Migrations
                 {
                     b.Property<int>("AnimalId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AnimalType");
 
                     b.Property<string>("Name");
 
@@ -83,6 +85,9 @@ namespace AnimalShelterAPI.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -121,6 +126,8 @@ namespace AnimalShelterAPI.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -186,6 +193,13 @@ namespace AnimalShelterAPI.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("AnimalShelterAPI.Models.User", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.HasDiscriminator().HasValue("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

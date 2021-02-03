@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace AnimalShelterAPI
+namespace AnimalShelterClient
 {
     public class Program
     {
@@ -18,6 +18,7 @@ namespace AnimalShelterAPI
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args);
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>().UseUrls("http://*:80");
     }
 }

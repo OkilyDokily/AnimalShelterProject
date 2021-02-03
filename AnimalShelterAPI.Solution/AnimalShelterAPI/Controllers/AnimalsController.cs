@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AnimalShelterAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AnimalShelterAPI.Controllers
 {
@@ -35,6 +36,7 @@ namespace AnimalShelterAPI.Controllers
 
         // POST api/values
         [HttpPost]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public void Post([FromBody] Animal animal)
         {
             _db.Animals.Add(animal);

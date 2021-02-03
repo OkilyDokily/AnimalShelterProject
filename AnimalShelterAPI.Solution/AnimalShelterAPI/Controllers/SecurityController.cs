@@ -29,14 +29,14 @@ namespace AnimalShelterAPI.Controllers
       _userManager = userManager;
       _config = config;
     }
-    private string GenerateJSONWebToken(string username)
+    private string GenerateJSONWebToken()
     {
       var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
       var credentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(securityKey, Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256);
 
       var token = new JwtSecurityToken(
         _config["Jwt:Issuer"],
-        audience: username,
+        _config["Jwt:Audience"],
         null,
         expires: DateTime.Now.AddMinutes(120),
         signingCredentials: credentials);
@@ -44,22 +44,31 @@ namespace AnimalShelterAPI.Controllers
       return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
-    [HttpPost]
-    [Route("/api/security/register")]
-    [AllowAnonymous]
-    public async Task Register([FromBody] RegisterViewModel registerView)
-    {
-      Console.WriteLine(registerView.Username);
-      await _userManager.CreateAsync(new User { UserName = registerView.Username }, registerView.Password);
-
-    }
-
     // [HttpPost]
-    // public async Task<string> Login([FromBody] LoginViewModel loginView)
+    // [Route("/api/security/register")]
+    // [AllowAnonymous]
+    // public async Task Register([FromBody] RegisterViewModel registerView)
     // {
-
-    //   return GenerateJSONWebToken(loginView.Username);
+    //   await _userManager.CreateAsync(new User { UserName = registerView.Username }, registerView.Password);
     // }
+
+    [HttpPost]
+    [Route("/api/security/login")]
+    public async Task<string> Login([FromBody] LoginViewModel loginView)
+    {
+      User user = await _userManager.FindByNameAsync(loginView.Username);
+      PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+
+      PasswordVerificationResult result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, loginView.Password);
+      if (result == PasswordVerificationResult.Success)
+      {
+        return GenerateJSONWebToken();
+      }
+      else
+      {
+        return "Your login failed";
+      }
+    }
   }
 
 

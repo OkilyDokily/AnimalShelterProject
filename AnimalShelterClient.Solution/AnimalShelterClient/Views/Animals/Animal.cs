@@ -1,5 +1,3 @@
-
-
 namespace AnimalShelterAPI.Models
 {
   public class Animal

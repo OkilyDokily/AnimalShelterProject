@@ -35,15 +35,15 @@ namespace AnimalShelterAPI
       services.AddIdentity<User, IdentityRole>()
       .AddEntityFrameworkStores<AnimalShelterContext>();
       services.Configure<IdentityOptions>(options =>
-{
-  // Default Password settings.
-  options.Password.RequireDigit = false;
-  options.Password.RequireLowercase = false;
-  options.Password.RequireNonAlphanumeric = false;
-  options.Password.RequireUppercase = false;
-  options.Password.RequiredLength = 1;
-  options.Password.RequiredUniqueChars = 1;
-});
+      {
+        // Default Password settings.
+        options.Password.RequireDigit = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredLength = 1;
+        options.Password.RequiredUniqueChars = 1;
+      });
       services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
   .AddJwtBearer(options =>
   {
