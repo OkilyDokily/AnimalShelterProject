@@ -1,16 +1,19 @@
 using RestSharp;
+using AnimalShelterClient.ViewModels;
+using System.Threading.Tasks;
 
 namespace AnimalShelterClient.Models
 {
     public class SecurityApiHelper
     {
 
-        public async Task Login()
+        public static async Task<string> Login(LoginViewModel loginView)
         {
-            var client = new RestClient("https://localhost:5000/api/");
+            var client = new RestClient("http://localhost:5000/api/");
             var request = new RestRequest("/security/login", DataFormat.Json);
-            var response = client.Get(request);
-            await client.GetAsync<HomeTimeline>(request, cancellationToken);
+            request.AddJsonBody(new {Username = loginView.Username ,Password = loginView.Password});
+            string result = await client.PostAsync<string>(request);
+            return result;
         }    
     }
 }
