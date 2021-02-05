@@ -1,8 +1,9 @@
 @using AnimalShelterClient.Models
-
+@using System;
 
 @{
   (bool,bool) values = Payload.GetValues(Context);
+
   @if(values.Item1 == true && values.Item2 == true)
   {
     <div>

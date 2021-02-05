@@ -63,7 +63,7 @@ namespace AnimalShelterAPI
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<User> userManager)
     {
       if (env.IsDevelopment())
       {
@@ -78,6 +78,7 @@ namespace AnimalShelterAPI
       //app.UseHttpsRedirection();
 
       app.UseAuthentication();
+      MyIdentityDataInitializer.SeedUsers(userManager,Configuration);
 
       app.UseMvc();
     }

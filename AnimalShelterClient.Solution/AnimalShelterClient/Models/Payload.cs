@@ -24,7 +24,7 @@ namespace AnimalShelterClient.Models
 
     public static string ExtractPayLoad(string base64EncodedData)
     {
-      return base64EncodedData.Split(" ")[1].Split(".")[1];
+      return base64EncodedData.Split(".")[1];
     }
 
     public static Payload ReturnPayloadFromHeader(string header)
@@ -45,14 +45,16 @@ namespace AnimalShelterClient.Models
       try
       {
         string cookie = context.Request.Cookies["JWT"];
-        Console.WriteLine(cookie);
-        Console.WriteLine("ahhhh");
-        Payload payload = GetPayload(Base64Decode(ExtractPayLoad(cookie)));
+        string payloadportion = ExtractPayLoad(cookie);
+        string convertedpayloadportion = Base64Decode(payloadportion);
+
+        Payload payload = GetPayload(convertedpayloadportion);
         DateTime dateTime = UnixTimeStampToDateTime(payload.exp);
 
         bool PastDue = (DateTime.Now > dateTime);
         if (!PastDue)
         {
+
           return (true, true);
         }
         else
