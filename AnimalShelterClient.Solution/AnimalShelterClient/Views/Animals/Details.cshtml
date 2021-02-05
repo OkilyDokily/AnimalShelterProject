@@ -1,0 +1,29 @@
+<p>@Model.name</p>
+<hr>
+
+@{
+  (bool,bool) values = Payload.GetValues(Context);
+  @if(values.Item1 == true && values.Item2 == true)
+  {
+    @using (@Html.BeginForm("Remove", "Animals", new { id = @Model.animalId }))
+    {
+      <input type="Submit" value="Delete this item">
+    }
+    <hr>
+    @Html.ActionLink("Edit","Edit","Animals",new {id = @Model.animalId})
+  }
+  else if(values.Item1 == true && values.Item2 == false)
+  {
+    <div>
+      <p>Your login token has expired. @Html.ActionLink("login","Login","Security") again to add new animals</p>
+    </div>
+  }
+  else
+  {
+    <div>
+      <p>You must @Html.ActionLink("login","Login","Security") in order to post animals</p>
+    </div>
+  }
+ 
+<hr>
+}

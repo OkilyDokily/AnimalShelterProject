@@ -2,11 +2,11 @@ using RestSharp;
 using AnimalShelterClient.ViewModels;
 using System.Threading.Tasks;
 
+
 namespace AnimalShelterClient.Models
 {
     public class SecurityApiHelper
     {
-
         public static async Task<string> Login(LoginViewModel loginView)
         {
             var client = new RestClient("http://localhost:5000/api/");

@@ -1,13 +1,18 @@
-@using AnimalShelterClient.Models
-
+@model AnimalShelterClient.Models.Animal
 
 @{
   (bool,bool) values = Payload.GetValues(Context);
   @if(values.Item1 == true && values.Item2 == true)
   {
-    <div>
-      <p>@Html.ActionLink("Enter a new animal","Create")</p>
-    </div>
+    @using(@Html.BeginForm())
+    {
+      @Html.HiddenFor(x => x.animalId)
+      @Html.LabelFor(x => x.name)
+      @Html.EditorFor(x => x.name)
+      @Html.LabelFor(x => x.animalType)
+      @Html.EditorFor(x => x.animalType)
+      <input type="submit" value="Edit this animal profile">
+    }
   }
   else if(values.Item1 == true && values.Item2 == false)
   {
@@ -21,11 +26,7 @@
       <p>You must @Html.ActionLink("login","Login","Security") in order to post animals</p>
     </div>
   }
- 
-<hr>
+  <hr>
 }
 
-@foreach(Animal a in @Model)
-{
-  <p>@Html.ActionLink(a.name,"Details",new {id = a.animalId})</p>
-}
+
