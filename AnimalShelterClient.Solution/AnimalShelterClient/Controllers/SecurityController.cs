@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using AnimalShelterClient.ViewModels;
 using AnimalShelterClient.Models;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
 namespace AnimalShelterClient.Controllers
 {

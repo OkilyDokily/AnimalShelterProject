@@ -1,10 +1,6 @@
 using System.Threading.Tasks;
 using RestSharp;
-using System;
 using Microsoft.AspNetCore.Http;
-using RestSharp.Authenticators;
-
-
 
 namespace AnimalShelterClient.Models
 {
@@ -17,7 +13,6 @@ namespace AnimalShelterClient.Models
       string results = await client.GetAsync<string>(request);
       return results;
     }
-
     public static async Task<string> Details(int id)
     {
       RestClient client = new RestClient("http://localhost:5000/api/");
@@ -25,7 +20,6 @@ namespace AnimalShelterClient.Models
       string results = await client.GetAsync<string>(request);
       return results;
     }
-
     public static async Task Create(Animal animal, HttpContext context)
     {
       RestClient client = new RestClient("http://localhost:5000/api/");
@@ -34,7 +28,6 @@ namespace AnimalShelterClient.Models
       request.AddJsonBody(animal);
       await client.PostAsync<Animal>(request);
     }
-
     public static async Task Remove(int id, HttpContext context)
     {
       RestClient client = new RestClient("http://localhost:5000/api/");
@@ -42,7 +35,6 @@ namespace AnimalShelterClient.Models
       request.AddHeader("Authorization", "Bearer " + context.Request.Cookies["JWT"]);
       await client.DeleteAsync<Animal>(request);
     }
-
     public static async Task Edit(Animal animal, HttpContext context)
     {
       RestClient client = new RestClient("http://localhost:5000/api/");

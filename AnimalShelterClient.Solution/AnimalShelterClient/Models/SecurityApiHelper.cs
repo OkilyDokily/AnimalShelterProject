@@ -2,7 +2,6 @@ using RestSharp;
 using AnimalShelterClient.ViewModels;
 using System.Threading.Tasks;
 
-
 namespace AnimalShelterClient.Models
 {
     public class SecurityApiHelper

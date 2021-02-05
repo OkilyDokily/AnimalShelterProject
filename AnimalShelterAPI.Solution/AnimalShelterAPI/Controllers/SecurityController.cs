@@ -1,11 +1,6 @@
 using AnimalShelterAPI.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.IdentityModel.Tokens;
 using System.Text;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Mvc;
@@ -43,14 +38,6 @@ namespace AnimalShelterAPI.Controllers
 
       return new JwtSecurityTokenHandler().WriteToken(token);
     }
-
-    // [HttpPost]
-    // [Route("/api/security/register")]
-    // [AllowAnonymous]
-    // public async Task Register([FromBody] RegisterViewModel registerView)
-    // {
-    //   await _userManager.CreateAsync(new User { UserName = registerView.Username }, registerView.Password);
-    // }
 
     [HttpPost]
     [Route("/api/security/login")]

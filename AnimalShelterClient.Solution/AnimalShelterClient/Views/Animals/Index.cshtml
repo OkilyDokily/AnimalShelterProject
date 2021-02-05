@@ -1,5 +1,4 @@
 @using AnimalShelterClient.Models
-@using System;
 
 @{
   (bool,bool) values = Payload.GetValues(Context);
@@ -22,7 +21,6 @@
       <p>You must @Html.ActionLink("login","Login","Security") in order to post animals</p>
     </div>
   }
- 
 <hr>
 }
 

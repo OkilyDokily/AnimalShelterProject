@@ -2,7 +2,6 @@ using AnimalShelterClient.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
 
 namespace AnimalShelterClient.Controllers
 {
@@ -38,7 +37,6 @@ namespace AnimalShelterClient.Controllers
             await Animal.Remove(id, HttpContext);
             return RedirectToAction("Index");
         }
-
         public async Task<ActionResult> Edit(int id)
         {
             Animal animal = await Animal.Details(id);

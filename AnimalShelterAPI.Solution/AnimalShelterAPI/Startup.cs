@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using AnimalShelterAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
-
 
 namespace AnimalShelterAPI
 {
@@ -50,11 +41,11 @@ namespace AnimalShelterAPI
     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
     {
       ValidateIssuer = true,
-      ValidateAudience = false,
+      ValidateAudience = true,
       ValidateLifetime = true,
       ValidateIssuerSigningKey = true,
       ValidIssuer = Configuration["Jwt:Issuer"],
-      //ValidAudience = Configuration["Jwt:Issuer"],
+      ValidAudience = Configuration["Jwt:Audience"],
       IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
     };
   });
@@ -75,10 +66,8 @@ namespace AnimalShelterAPI
         app.UseHsts();
       }
 
-      //app.UseHttpsRedirection();
-
       app.UseAuthentication();
-      MyIdentityDataInitializer.SeedUsers(userManager,Configuration);
+      MyIdentityDataInitializer.SeedUsers(userManager, Configuration);
 
       app.UseMvc();
     }
