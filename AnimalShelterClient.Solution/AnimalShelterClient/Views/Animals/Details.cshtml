@@ -1,4 +1,7 @@
+@using AnimalShelterClient.Models
+
 <p>@Model.name</p>
+<p>@Model.animalType</p>
 <hr>
 
 @{
@@ -24,6 +27,5 @@
       <p>You must @Html.ActionLink("login","Login","Security") in order to post animals</p>
     </div>
   }
- 
 <hr>
 }
