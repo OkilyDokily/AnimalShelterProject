@@ -6,9 +6,7 @@ namespace AnimalShelterAPI.Models
   //class from http://www.binaryintellect.net/articles/5e180dfa-4438-45d8-ac78-c7cc11735791.aspx
   public static class MyIdentityDataInitializer
   {
-    public static void SeedData(UserManager<User> userManager)
-    {
-    }
+    public static void SeedData(UserManager<User> userManager){}
 
     public static void SeedUsers(UserManager<User> userManager, IConfiguration configuration)
     {

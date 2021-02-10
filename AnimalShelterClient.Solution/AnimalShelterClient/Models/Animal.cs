@@ -22,20 +22,24 @@ namespace AnimalShelterClient.Models
       List<Animal> animals = JsonSerializer.Deserialize<List<Animal>>(result);
       return animals;
     }
+
     public static async Task<Animal> Details(int id)
     {
       string result = await ApiHelper.Details(id);
       Animal animal = JsonSerializer.Deserialize<Animal>(result);
       return animal;
     }
+   
     public static async Task Create(Animal animal,HttpContext context)
     {
       await ApiHelper.Create(animal, context);
     }
+   
     public static async Task Remove(int id, HttpContext context)
     {
       await ApiHelper.Remove(id, context);
     }
+    
     public static async Task Edit(Animal animal, HttpContext context)
     {
       await ApiHelper.Edit(animal, context);

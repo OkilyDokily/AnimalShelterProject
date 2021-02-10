@@ -17,6 +17,7 @@ namespace AnimalShelterClient.Controllers
     {
       Response.Cookies.Delete("JWT");
       string cookie = await Security.Login(login);
+      if (cookie == "Your login failed") { return RedirectToAction("Login", "Security"); }
       Response.Cookies.Append("JWT", cookie, new Microsoft.AspNetCore.Http.CookieOptions
       {
         HttpOnly = true,

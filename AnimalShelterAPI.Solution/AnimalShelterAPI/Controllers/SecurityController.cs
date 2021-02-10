@@ -19,11 +19,13 @@ namespace AnimalShelterAPI.Controllers
   {
     private readonly IConfiguration _config;
     private readonly UserManager<User> _userManager;
+    
     public SecurityController(IConfiguration config, UserManager<User> userManager)
     {
       _userManager = userManager;
       _config = config;
     }
+
     private string GenerateJSONWebToken()
     {
       var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
@@ -43,20 +45,24 @@ namespace AnimalShelterAPI.Controllers
     [Route("/api/security/login")]
     public async Task<string> Login([FromBody] LoginViewModel loginView)
     {
-      User user = await _userManager.FindByNameAsync(loginView.Username);
-      PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
-
-      PasswordVerificationResult result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, loginView.Password);
-      if (result == PasswordVerificationResult.Success)
+      try
       {
-        return GenerateJSONWebToken();
+        User user = await _userManager.FindByNameAsync(loginView.Username);
+        PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+        PasswordVerificationResult result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, loginView.Password);
+        if (result == PasswordVerificationResult.Success)
+        {
+          return GenerateJSONWebToken();
+        }
+        else
+        {
+          return "Your login failed";
+        }
       }
-      else
+      catch
       {
         return "Your login failed";
       }
     }
   }
-
-
 }

@@ -23,20 +23,22 @@ _A Factory app with many to many relationships_
 * Open the appsettings.json file
 * Edit the Password property to a selected password
 * This will be the default users password which enable Posting, Deleting, and Updating animals.
-* Edit the JWT:Password property to a selected password
-* This will ensure that the JWT token produced by the server are secure.
+* Your username will be User1
+* Edit the Jwt:Key property from "ThisismySecretKey" to a selected password in the appsetting.json
+* This will ensure that the JWT tokens produced by the server are secure.
 * enter `dotnet run` to open the program
 * Congratulations you should have the API running.
-* You can make calls to the api with Postman or you can use the client web api.
+* You can make calls to the api with Postman or you can use the client web api which I will explain how to use in the next steps.
 * To use the client web api read on.
 * From the root folder of the AnimalShelterProject navigate to AnimalShelterClient.Solution
 * Then navigate to AnimalShelterClient
 * open your terminal and enter dotnet restore `dotnet restore`
 * enter `dotnet run` to start the program
+* Open the program by going to http://localhost:80 in your browser
 * remember that the api app must be running at the same time as the client app in order for the client app to work.
 
 
-## Api Routes
+## Unsecured Api Routes - See the Secured API routes section for more routes
 You must be running the api app to access these routes. If you are using the client app all of the routes are automatically handled for you.
 
 Index route: To access a list of all animals in the database
@@ -67,6 +69,7 @@ Enter the login token into the header of the request in postman according to the
 * so header then space then paste the cookie value you received from the login request
 
 ## Secured API routes
+* See the previous sections for login instructions
 POST route: Create a new animal entitity in the database
 http://localhost:5000/api/animals/ as a POST request in postman.
 Include in the body of the request a JSON object that includes the name of the animal and the type of animal it is.

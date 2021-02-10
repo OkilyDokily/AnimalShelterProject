@@ -12,6 +12,7 @@ namespace AnimalShelterAPI.Controllers
   public class AnimalsController : ControllerBase
   {
     private readonly AnimalShelterContext _db;
+    
     public AnimalsController(AnimalShelterContext db)
     {
       _db = db;

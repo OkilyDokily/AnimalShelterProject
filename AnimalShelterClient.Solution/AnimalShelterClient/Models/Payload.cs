@@ -14,19 +14,23 @@ namespace AnimalShelterClient.Models
     {
       return JsonSerializer.Deserialize<Payload>(jsonString);
     }
+
     public static string Base64Decode(string base64EncodedData)
     {
       var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
       return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
     }
+    
     public static string ExtractPayLoad(string base64EncodedData)
     {
       return base64EncodedData.Split(".")[1];
     }
+    
     public static Payload ReturnPayloadFromHeader(string header)
     {
       return GetPayload(Base64Decode(ExtractPayLoad(header)));
     }
+    
     public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
     {
       // Unix timestamp is seconds past epoch
@@ -34,6 +38,7 @@ namespace AnimalShelterClient.Models
       dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
       return dtDateTime;
     }
+    
     public static (bool, bool) GetValues(HttpContext context)
     {
       try
