@@ -7,11 +7,11 @@
   {
     @using(@Html.BeginForm())
     {
-      @Html.HiddenFor(x => x.animalId)
-      @Html.LabelFor(x => x.name)
-      @Html.EditorFor(x => x.name)
-      @Html.LabelFor(x => x.animalType)
-      @Html.EditorFor(x => x.animalType)
+      @Html.HiddenFor(x => x.AnimalId)
+      @Html.LabelFor(x => x.Name)
+      @Html.EditorFor(x => x.Name)
+      @Html.LabelFor(x => x.AnimalType)
+      @Html.EditorFor(x => x.AnimalType)
       <input type="submit" value="Edit this animal profile">
     }
   }

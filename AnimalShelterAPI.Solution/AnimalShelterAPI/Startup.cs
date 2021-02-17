@@ -7,6 +7,7 @@ using AnimalShelterAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
+using System.Text.Json;
 using Microsoft.AspNetCore.Identity;
 
 namespace AnimalShelterAPI
@@ -49,7 +50,7 @@ namespace AnimalShelterAPI
       IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
     };
   });
-      services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+      services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(o => o.UseMemberCasing()); 
       services.AddDbContext<AnimalShelterContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
     }
 

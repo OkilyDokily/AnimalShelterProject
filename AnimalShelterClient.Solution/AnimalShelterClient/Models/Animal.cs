@@ -4,22 +4,24 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace AnimalShelterClient.Models
 {
   public class Animal
   {
-    public int animalId { get; set; }
+    public int AnimalId { get; set; }
     [Required]
-    public string name { get; set; }
+    public string Name { get; set; }
     [Required]
     [DisplayName("Animal Type")]
-    public string animalType { get; set; }
+    public string AnimalType { get; set; }
     
     public static async Task<List<Animal>> Index()
     {
       string result = await ApiHelper.Index();
       List<Animal> animals = JsonSerializer.Deserialize<List<Animal>>(result);
+      
       return animals;
     }
 

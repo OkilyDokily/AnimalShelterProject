@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using RestSharp;
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace AnimalShelterClient.Models
 {
@@ -11,6 +12,8 @@ namespace AnimalShelterClient.Models
       var client = new RestClient("http://localhost:5000/api/");
       var request = new RestRequest("/animals", DataFormat.Json);
       string results = await client.GetAsync<string>(request);
+      Console.WriteLine("adfsdfads");
+      Console.WriteLine(results);
       return results;
     }
 
@@ -42,7 +45,7 @@ namespace AnimalShelterClient.Models
     public static async Task Edit(Animal animal, HttpContext context)
     {
       RestClient client = new RestClient("http://localhost:5000/api/");
-      RestRequest request = new RestRequest("/animals/" + animal.animalId, DataFormat.Json);
+      RestRequest request = new RestRequest("/animals/" + animal.AnimalId, DataFormat.Json);
       request.AddHeader("Authorization", "Bearer " + context.Request.Cookies["JWT"]);
       
       request.AddJsonBody(animal);

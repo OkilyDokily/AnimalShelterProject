@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace AnimalShelterAPI.Models
 {
   public class Animal

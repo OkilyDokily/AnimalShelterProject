@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using AnimalShelterClient.ViewModels;
 using AnimalShelterClient.Models;
 using System.Threading.Tasks;
+using System;
 
 namespace AnimalShelterClient.Controllers
 {
@@ -17,6 +18,8 @@ namespace AnimalShelterClient.Controllers
     {
       Response.Cookies.Delete("JWT");
       string cookie = await Security.Login(login);
+      Console.WriteLine(cookie);
+      
       if (cookie == "Your login failed") { return RedirectToAction("Login", "Security"); }
       Response.Cookies.Append("JWT", cookie, new Microsoft.AspNetCore.Http.CookieOptions
       {
