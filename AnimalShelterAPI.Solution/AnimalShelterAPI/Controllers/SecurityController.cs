@@ -19,7 +19,7 @@ namespace AnimalShelterAPI.Controllers
   {
     private readonly IConfiguration _config;
     private readonly UserManager<User> _userManager;
-    
+
     public SecurityController(IConfiguration config, UserManager<User> userManager)
     {
       _userManager = userManager;
@@ -35,7 +35,7 @@ namespace AnimalShelterAPI.Controllers
         _config["Jwt:Issuer"],
         _config["Jwt:Audience"],
         null,
-        expires: DateTime.Now.AddMinutes(120),
+        expires: DateTime.Now.AddMinutes(1),
         signingCredentials: credentials);
 
       return new JwtSecurityTokenHandler().WriteToken(token);
