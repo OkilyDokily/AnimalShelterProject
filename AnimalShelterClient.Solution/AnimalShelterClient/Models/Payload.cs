@@ -44,10 +44,12 @@ namespace AnimalShelterClient.Models
       try
       {
         string cookie = context.Request.Cookies["JWT"];
+  
         string payloadportion = ExtractPayLoad(cookie);
         string convertedpayloadportion = Base64Decode(payloadportion);
 
         Payload payload = GetPayload(convertedpayloadportion);
+
         DateTime dateTime = UnixTimeStampToDateTime(payload.exp);
 
         bool PastDue = (DateTime.Now > dateTime);

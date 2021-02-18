@@ -7,7 +7,6 @@ using AnimalShelterAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
-using System.Text.Json;
 using Microsoft.AspNetCore.Identity;
 
 namespace AnimalShelterAPI

@@ -1,19 +1,19 @@
 @using AnimalShelterClient.Models
 
-<p>@Model.name</p>
-<p>@Model.animalType</p>
+<p>@Model.Name</p>
+<p>@Model.AnimalType</p>
 <hr>
 
 @{
   (bool,bool) values = Payload.GetValues(Context);
   @if(values.Item1 == true && values.Item2 == true)
   {
-    @using (@Html.BeginForm("Remove", "Animals", new { id = @Model.animalId }))
+    @using (@Html.BeginForm("Remove", "Animals", new { id = @Model.AnimalId }))
     {
       <input type="Submit" value="Delete this item">
     }
     <hr>
-    @Html.ActionLink("Edit","Edit","Animals",new {id = @Model.animalId})
+    @Html.ActionLink("Edit","Edit","Animals",new {id = @Model.AnimalId})
   }
   else if(values.Item1 == true && values.Item2 == false)
   {
