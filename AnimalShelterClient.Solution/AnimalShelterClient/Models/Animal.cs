@@ -17,34 +17,34 @@ namespace AnimalShelterClient.Models
     [DisplayName("Animal Type")]
     public string AnimalType { get; set; }
     
-    public static async Task<List<Animal>> Index()
+    public static async Task<List<Animal>> GetAll()
     {
-      string result = await ApiHelper.Index();
+      string result = await ApiHelper.GetAll();
       List<Animal> animals = JsonSerializer.Deserialize<List<Animal>>(result);
       
       return animals;
     }
 
-    public static async Task<Animal> Details(int id)
+    public static async Task<Animal> Get(int id)
     {
-      string result = await ApiHelper.Details(id);
+      string result = await ApiHelper.Get(id);
       Animal animal = JsonSerializer.Deserialize<Animal>(result);
       return animal;
     }
    
-    public static async Task Create(Animal animal,HttpContext context)
+    public static async Task Post(Animal animal,HttpContext context)
     {
-      await ApiHelper.Create(animal, context);
+      await ApiHelper.Post(animal, context);
     }
    
-    public static async Task Remove(int id, HttpContext context)
+    public static async Task Delete(int id, HttpContext context)
     {
-      await ApiHelper.Remove(id, context);
+      await ApiHelper.Delete(id, context);
     }
     
-    public static async Task Edit(Animal animal, HttpContext context)
+    public static async Task Put(Animal animal, HttpContext context)
     {
-      await ApiHelper.Edit(animal, context);
+      await ApiHelper.Put(animal, context);
     }
   }
 }

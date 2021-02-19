@@ -7,7 +7,7 @@ namespace AnimalShelterClient.Models
 {
   public class ApiHelper
   {
-    public static async Task<string> Index()
+    public static async Task<string> GetAll()
     {
       var client = new RestClient("http://localhost:5000/api/");
       var request = new RestRequest("/animals", DataFormat.Json);
@@ -17,7 +17,7 @@ namespace AnimalShelterClient.Models
       return results;
     }
 
-    public static async Task<string> Details(int id)
+    public static async Task<string> Get(int id)
     {
       RestClient client = new RestClient("http://localhost:5000/api/");
       RestRequest request = new RestRequest("/animals/" + id, DataFormat.Json);
@@ -25,7 +25,7 @@ namespace AnimalShelterClient.Models
       return results;
     }
 
-    public static async Task Create(Animal animal, HttpContext context)
+    public static async Task Post(Animal animal, HttpContext context)
     {
       RestClient client = new RestClient("http://localhost:5000/api/");
       RestRequest request = new RestRequest("/animals/", DataFormat.Json);
@@ -34,7 +34,7 @@ namespace AnimalShelterClient.Models
       await client.PostAsync<Animal>(request);
     }
 
-    public static async Task Remove(int id, HttpContext context)
+    public static async Task Delete(int id, HttpContext context)
     {
       RestClient client = new RestClient("http://localhost:5000/api/");
       RestRequest request = new RestRequest("/animals/" + id, DataFormat.Json);
@@ -42,7 +42,7 @@ namespace AnimalShelterClient.Models
       await client.DeleteAsync<Animal>(request);
     }
     
-    public static async Task Edit(Animal animal, HttpContext context)
+    public static async Task Put(Animal animal, HttpContext context)
     {
       RestClient client = new RestClient("http://localhost:5000/api/");
       RestRequest request = new RestRequest("/animals/" + animal.AnimalId, DataFormat.Json);
