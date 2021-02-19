@@ -24,7 +24,7 @@ _A Factory app with many to many relationships_
 * Edit the Password property to a selected password
 * This will be the default users password which enable Posting, Deleting, and Updating animals.
 * Your username will be User1
-* Edit the Jwt:Key property from "ThisismySecretKey" to a selected password in the appsetting.json
+* Edit the Jwt:Key property from "ThisismySecretKey" to a selected password at least 16 characters in length in the appsetting.json
 * This will ensure that the JWT tokens produced by the server are secure.
 * enter `dotnet run` to open the program
 * Congratulations you should have the API running.
