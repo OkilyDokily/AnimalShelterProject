@@ -12,8 +12,6 @@ namespace AnimalShelterClient.Models
       var client = new RestClient("http://localhost:5000/api/");
       var request = new RestRequest("/animals", DataFormat.Json);
       string results = await client.GetAsync<string>(request);
-      Console.WriteLine("adfsdfads");
-      Console.WriteLine(results);
       return results;
     }
 
